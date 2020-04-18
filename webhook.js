@@ -1,5 +1,5 @@
 let http = require("http")
-http.createServer(function (req, res) {
+let server = http.createServer(function (req, res) {
   console.log("webhook req", req.method, req.url);
   if (req.method == 'POST' && req.url == '/webhook') {
     res.setHeader("Content-Type", "application/json")
@@ -9,6 +9,6 @@ http.createServer(function (req, res) {
   }
 
 })
-http.listen(3002, () => {
+server.listen(3002, () => {
   console.log("webhook服务于3002端口启动");
 })
