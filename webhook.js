@@ -7,16 +7,16 @@ function sign (body) {
   return `sha1` + crypto.createHmac('sha1', secret).update(body).digest("hex")
 }
 let server = http.createServer(function (req, res) {
-  console.log("webhook req", req.method, req.url);
+  console.log("这是啥？A");
   if (req.method == 'POST' && req.url == '/webhook') {
-    console.log("怎么回事")
+    console.log("这是啥？B");
     let buffers = []
     req.on("data", function (buffer) {
       buffers.push(buffer)
     })
 
     req.on('end', function (buffer) {
-      console.log("这里有问题", buffers)
+      console.log("这是啥？C");
       let body = Buffer.concat(buffers)
       let event = req.headers["x-github-event"]; // event类型我们选的push
       let signature = req.headers['x-hub-signature'] // 校验签名
@@ -26,19 +26,18 @@ let server = http.createServer(function (req, res) {
       res.setHeader("Content-Type", "application/json")
       res.end(JSON.stringify({ ok: true }))
       // 如果是代码推送就开始部署
-      console.log("什么事件", event)
       if (event == 'push') {
-        console.log("进来了么？");
-
         let payload = JSON.parse(body)
         let child = spawn('sh', [`./${payload.repository.name}.sh`])
         let buffers = [];
         child.stdout.on("data", function (buffer) {
           buffers.push(buffer)
         })
+        console.log("这是啥？");
         child.stdout.on("end", function (buffer) {
           let logs = buffer.concat(buffers)
-          console.log("拿到推送日志me？", logs);
+          console.log("这是啥？", logs);
+
 
         })
       }
