@@ -26,7 +26,7 @@ let server = http.createServer(function (req, res) {
       // 如果是代码推送就开始部署
       if (event == 'push') {
         let payload = JSON.parse(body)
-        let child = spawn('sh', [`./${payload.repository.name}`])
+        let child = spawn('sh', [`./${payload.repository.name}.sh`])
         let buffers = [];
         child.stdout.on("data", function (buffer) {
           buffers.push(buffer)
