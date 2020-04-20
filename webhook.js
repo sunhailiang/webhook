@@ -4,7 +4,7 @@ let { spawn } = require("child_process") // 获取子线程
 let secret = "6239528"
 // 加密签名算法
 function sign (body) {
-  return `sha1` + crypto.createHmac('sha1', secret).update(body).digest("hex")
+  return `sha1=` + crypto.createHmac('sha1', secret).update(body).digest("hex")
 }
 let server = http.createServer(function (req, res) {
   console.log("这是啥？A");
