@@ -15,6 +15,7 @@ let server = http.createServer(function (req, res) {
     })
 
     req.on('end', function (buffer) {
+      console.log("这里有问题", buffers)
       let body = Buffer.concat(buffers)
       let event = req.headers["x-github-event"]; // event类型我们选的push
       let signature = req.headers['x-hub-signature'] // 校验签名
