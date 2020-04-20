@@ -9,6 +9,7 @@ function sign (body) {
 let server = http.createServer(function (req, res) {
   console.log("webhook req", req.method, req.url);
   if (req.method == 'POST' && req.url == '/webhook') {
+    console.log("怎么回事")
     let buffers = []
     req.on("data", function (buffer) {
       buffers.push(buffer)
@@ -25,7 +26,10 @@ let server = http.createServer(function (req, res) {
       res.setHeader("Content-Type", "application/json")
       res.end(JSON.stringify({ ok: true }))
       // 如果是代码推送就开始部署
+      console.log("什么事件", event)
       if (event == 'push') {
+        console.log("进来了么？");
+
         let payload = JSON.parse(body)
         let child = spawn('sh', [`./${payload.repository.name}.sh`])
         let buffers = [];
