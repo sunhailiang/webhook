@@ -18,8 +18,13 @@ let server = http.createServer(function (req, res) {
     req.on('end', function (buffer) {
       console.log("这是啥？C");
       let body = Buffer.concat(buffers)
+      console.log("这是啥？D");
       let event = req.headers["x-github-event"]; // event类型我们选的push
+      console.log("这是啥？E");
       let signature = req.headers['x-hub-signature'] // 校验签名
+      console.log("这是啥？F", signature);
+      console.log("这是啥？G", sign(body));
+
       if (signature !== sign(body)) {
         return res.end("Not Allowed")
       }
