@@ -20,7 +20,7 @@ let server = http.createServer(function (req, res) {
       let body = Buffer.concat(buffers)
       console.log("这是啥？D");
       let event = req.headers["x-github-event"]; // event类型我们选的push
-      console.log("这是啥？E");
+      console.log("这是啥？E", req.headers);
       let signature = req.headers['x-hub-signature'] // 校验签名
       console.log("这是啥？F", signature);
       console.log("这是啥？G", sign(body));
