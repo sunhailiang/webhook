@@ -7,7 +7,7 @@ git clean -f
 echo "拉取最新代码"
 git pull origin master
 echo "构建代码"
-npm run build 
+npm run build:production 
 echo "开始执行构建-注意了：vue-fe后面的部分必须要有"
 docker build -t vue-fe:1.0 .
 echo "停止并删除旧容器"
