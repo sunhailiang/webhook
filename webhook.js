@@ -40,7 +40,7 @@ let server = http.createServer(function (req, res) {
         child.stdout.on("data", function (buffer) {
           buffers.push(buffer)
         })
-        console.log("这是啥？");
+        console.log("这是啥");
         child.stdout.on("end", function (buffer) {
           let logs = Buffer.concat(buffers)
           console.log("这是啥？", logs);
